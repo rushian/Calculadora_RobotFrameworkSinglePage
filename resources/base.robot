@@ -10,13 +10,11 @@ Library         JSONLibrary
 Library         OperatingSystem
 Library         Screenshot
 Library         String
-# caso nao seja utilizada a pasta actions, entao nas bibliotecas abaixo deve-se remover ../
-Library         geral.py
                 
 *** Variables ***
 ${REMOTE_URL}               http://127.0.0.1:4723/wd/hub
-${avdReadyTimeout}          30000
-${avdLaunchTimeout}         12000
+${avdReadyTimeout}          5000
+${avdLaunchTimeout}         5000
 ${platformName}             Android
 ${automationName}           uiautomator2
 ${deviceName}               emulator-5554
@@ -25,7 +23,7 @@ ${appActivity}              com.android.calculator2.Calculator
 ${deviceOrientation}        portrait
 ${ensureWebviewsHavePages}  true
 ${nativeWebScreenshot}      true
-${newCommandTimeout}        3600
+${newCommandTimeout}        1000
 ${connectHardwareKeyboard}  true
 
 *** Keywords ***
@@ -78,6 +76,7 @@ Tirar print
     Create Directory                evidencias\\${data_atual}\\${titulo}
     Set Screenshot Directory        evidencias\\${data_atual}\\${titulo}
     Take Screenshot                 evidence-${nome_arquivo}.png
+
 Espere por ${tempo} segundos ate que a palavra chave (${palavra-chave}) seja executada com sucesso, verifica a cada ${intervalo}s
     Wait Until Keyword Succeeds       ${tempo}      ${intervalo}      ${palavra-chave}
 
@@ -95,7 +94,6 @@ Arrastar pra baixo
 
 Repetir palavra-chave ${qtd} vezes - ${palavra-chave}
     Repeat Keyword      ${qtd}      ${palavra-chave}
-
 
 Mover Screenshots
     Set Suite Variable      ${titulo}          ${TEST NAME}
